@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+   #div1 {
+            width: 250px;
+            height: 250px;
+            border: 3px solid blue;
+        }
+</style>
+</head>
+
+<body ondrop="dropElement(event)" ondragover="allowDragElem(event)">
+  <p id="score"></p>
+  <div id="div1" ondrop="dropElement(event)" ondragover="allowDragElem(event)"></div>
+    <img id="img1" src="360_F_63091473_n532l5yakYHuA6fJue4OMmhkI9eWG6Eu.jpg" width="250" height="250" ondragstart="dragElement(event)" draggable="true">
+    <script>
+      // var score=document.getElementById("score")
+      var get;
+      var count=0
+        function allowDragElem(ev) {
+            ev.preventDefault();
+        }
+
+        function dragElement(ev) {
+           
+            ev.dataTransfer.setData("dogElement", ev.target.id);
+           
+        }
+
+        function dropElement(ev) {
+            // dataTransfer.getData("key")
+           var data= ev.dataTransfer.getData("dogElement");
+            ev.target.appendChild(document.getElementById(data));
+            count++
+            sessionStorage.setItem("score",count)
+            var get=sessionStorage.getItem("score")
+            document.getElementById("score").innerHTML="Score:"+get
+        }
+        document.addEventListener("load",function (){
+          if (sessionStorage.getItem('score')){
+            document.getElementById("score").innerHTML="Score:"+get
+          }
+        })
+        </script>
+  </body>
+</html>
